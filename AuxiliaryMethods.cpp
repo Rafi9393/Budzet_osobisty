@@ -26,3 +26,22 @@ string AuxiliaryMethods::readLine()
     getline(cin, input);
     return input;
 }
+
+string AuxiliaryMethods::convertIntToString(int number)
+{
+    stringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}
+
+
+float AuxiliaryMethods::changeCommaToDot(string floatNumber)
+{
+    for (int i = 0; i < floatNumber.size(); i++)
+    {
+        if ( floatNumber[i] == ',')
+            floatNumber[i] = '.';
+    }
+    return stof(floatNumber);
+}

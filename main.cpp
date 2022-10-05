@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    PersonalBudget personalBudget("Users.xml");
+    PersonalBudget personalBudget("Users.xml", "Incomes.xml", "Expenses.xml");
 
     personalBudget.mainApp();
     return 0;

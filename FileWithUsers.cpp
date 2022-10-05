@@ -15,7 +15,7 @@ vector <User> FileWithUsers::readUsersFromFile()
         {
             xml.IntoElem();
             xml.FindElem( "id" );
-            user.setId(atoi( MCD_2PCSZ(xml.GetData())));
+            user.setId(stoi( MCD_2PCSZ(xml.GetData())));
             xml.FindElem( "Name" );
             user.setName(xml.GetData());
             xml.FindElem( "Surname" );

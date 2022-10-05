@@ -5,6 +5,33 @@ void PersonalBudget::userRegistration()
     userManager.userRegistration();
 }
 
+void PersonalBudget::userLogin()
+{
+    userManager.userLogin();
+    if( userManager.isUserLoggedIn() )
+    {
+        accountOperationsManager = new AccountOperationsManager(NAME_OF_THE_FILE_WITH_EXPENSES, NAME_OF_THE_FILE_WITH_INCOMES, userManager.getLoggedUserId());
+    }
+}
+
+void PersonalBudget::userLogout()
+{
+    userManager.userLogout();
+    delete accountOperationsManager;
+    accountOperationsManager = NULL;
+}
+
+void PersonalBudget::addIncome()
+{
+    accountOperationsManager -> addIncome();
+}
+
+void PersonalBudget::addExpense()
+{
+    accountOperationsManager -> addExpense();
+}
+
+
 char PersonalBudget::chooseOptionFromMainMenu()
 {
     char option;
@@ -61,7 +88,7 @@ void PersonalBudget::mainApp()
                 userRegistration();
                 break;
             case '2':
-
+                userLogin();
                 break;
             case '9':
                 exit(0);
@@ -78,10 +105,10 @@ void PersonalBudget::mainApp()
             switch (chooseOptionFromUserMenu())
             {
             case '1':
-
+                addIncome();
                 break;
             case '2':
-
+                addExpense();
                 break;
             case '3':
 
@@ -96,7 +123,7 @@ void PersonalBudget::mainApp()
 
                 break;
             case '7':
-                userManager.loggedUserId = -1;
+                userLogout();
                 break;
             default:
                 cout << endl << "Nie ma takiej opcji w menu." << endl << endl;
