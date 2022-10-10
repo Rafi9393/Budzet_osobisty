@@ -18,13 +18,13 @@ void FileWithExpenses::writeExpenseToFile(Expense expense)
 
     xml.FindElem();
     xml.IntoElem();
-    xml.AddElem("Expenses");
+    xml.AddElem("Expense");
     xml.IntoElem();
     xml.AddElem("ExpenseId", expense.getExpenseId() );
     xml.AddElem("UserId", expense.getUserId() );
     xml.AddElem("Date", expense.getDate() );
     xml.AddElem("Item", expense.getItem() );
-    xml.AddElem("Amount", expense.getAmount() );
+    xml.AddElem("Amount", AuxiliaryMethods::convertFloatToTwoDigitsPrecisionString(expense.getAmount()));
 
     xml.Save(FILE_NAME);
     lastExpenseId++;
@@ -41,7 +41,7 @@ vector <Expense> FileWithExpenses::readExpensesFromFile(int loggedUserId)
     {
         xml.FindElem();
         xml.IntoElem();
-        while ( xml.FindElem("Expenses") )
+        while ( xml.FindElem("Expense") )
         {
             xml.IntoElem();
             xml.FindElem( "ExpenseId" );
@@ -70,17 +70,3 @@ vector <Expense> FileWithExpenses::readExpensesFromFile(int loggedUserId)
     }
     return expenses;
 }
-
-//void FileWithExpenses::printExpenses(vector <Expense> expenses)
-//{
-//    for (int i = 0; i < expenses.size(); i++)
-//        cout <<expenses[i].getExpenseId() <<". "<<expenses[i].getUserId()<<". "<<expenses[i].getDate()
-//             <<" "<<expenses[i].getItem()<<" "<<expenses[i].getAmount()<<endl;
-//}
-
-//void FileWithIncomes::printIncomes(vector <Income> incomes)
-//{
-//    for (int i = 0; i < incomes.size(); i++)
-//        cout <<incomes[i].getIncomeId() <<". "<<incomes[i].getUserId()<<". "<<incomes[i].getDate()
-//             <<" "<<incomes[i].getItem()<<" "<<incomes[i].getAmount()<<endl;
-//}

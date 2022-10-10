@@ -31,11 +31,9 @@ void PersonalBudget::addExpense()
     accountOperationsManager -> addExpense();
 }
 
-
 char PersonalBudget::chooseOptionFromMainMenu()
 {
     char option;
-
     system("cls");
     cout << "    >>> MENU  GLOWNE <<<" << endl;
     cout << "---------------------------" << endl;
@@ -45,14 +43,12 @@ char PersonalBudget::chooseOptionFromMainMenu()
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
     option = AuxiliaryMethods::readChar();
-
     return option;
 }
 
 char PersonalBudget::chooseOptionFromUserMenu()
 {
     char option;
-
     system("cls");
     cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
     cout << "---------------------------" << endl;
@@ -67,21 +63,15 @@ char PersonalBudget::chooseOptionFromUserMenu()
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
     option = AuxiliaryMethods::readChar();
-
     return option;
 }
 
-
-
 void PersonalBudget::mainApp()
 {
-
     while (true)
     {
         if (!userManager.isUserLoggedIn())
         {
-
-
             switch (chooseOptionFromMainMenu())
             {
             case '1':
@@ -101,7 +91,6 @@ void PersonalBudget::mainApp()
         }
         else
         {
-
             switch (chooseOptionFromUserMenu())
             {
             case '1':
@@ -111,16 +100,16 @@ void PersonalBudget::mainApp()
                 addExpense();
                 break;
             case '3':
-
+                accountOperationsManager->currentMonthBalance();
                 break;
             case '4':
-
+                accountOperationsManager->lastMonthBalance();
                 break;
             case '5':
-
+                accountOperationsManager->periodicMonthBalance();
                 break;
             case '6':
-
+                userManager.changeLoggedUserPassword();
                 break;
             case '7':
                 userLogout();

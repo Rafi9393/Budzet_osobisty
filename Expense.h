@@ -12,6 +12,7 @@ class Expense :public AccountOperation
 public:
     void setExpenseId(int expenseId);
     int getExpenseId();
+
 };
 
 #endif

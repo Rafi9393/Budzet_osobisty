@@ -20,7 +20,6 @@ class UserManager
     User readNewUserData();
     bool isLoginExists(string login);
     int readNewUserId();
-    void printUsers();
 
 public:
     UserManager(string fileName) :fileWithUsers(fileName)
@@ -34,6 +33,7 @@ public:
     void userRegistration();
     int userLogin();
     void userLogout();
+    void changeLoggedUserPassword();
 };
 
 #endif

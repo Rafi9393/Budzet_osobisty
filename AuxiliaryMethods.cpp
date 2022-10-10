@@ -36,12 +36,30 @@ string AuxiliaryMethods::convertIntToString(int number)
 }
 
 
-float AuxiliaryMethods::changeCommaToDot(string floatNumber)
+bool AuxiliaryMethods::checkFloatAndChangeCommaToDot(string &floatNumber)
 {
-    for (int i = 0; i < floatNumber.size(); i++)
+    for (size_t i = 0; i < floatNumber.size(); i++)
     {
-        if ( floatNumber[i] == ',')
+        if (floatNumber[i] >= 48 && floatNumber[i] <= 57){}
+        else if (floatNumber [i] == '.'){}
+        else if (floatNumber[i] == ',')
             floatNumber[i] = '.';
+        else
+            return false;
     }
-    return stof(floatNumber);
+    return true;
+
+}
+
+void AuxiliaryMethods::setTextColor(unsigned char color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+string AuxiliaryMethods::convertFloatToTwoDigitsPrecisionString(float number)
+{
+    stringstream stream;
+    stream << fixed << setprecision(2) << number;
+    string twoDigitsString = stream.str();
+    return twoDigitsString;
 }

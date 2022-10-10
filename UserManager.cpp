@@ -23,10 +23,8 @@ int UserManager::userLogin()
 {
     User user;
     string login = "", password = "";
-
     cout << endl << "Podaj login: ";
     login = AuxiliaryMethods::readLine();
-
     for (size_t i = 0; i < users.size(); i++)
     {
         if (users[i].getLogin() == login)
@@ -48,7 +46,6 @@ int UserManager::userLogin()
             system("pause");
             return 0;
         }
-
     }
     cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
     system("pause");
@@ -87,7 +84,6 @@ User UserManager::readNewUserData()
             cout << "Podany login jest zajety. Sprobuj jeszcze raz." << endl;
     }
     while (isLoginExists(login));
-
     cout << "Podaj haslo: ";
     user.setPassword(AuxiliaryMethods::readLine());
     user.setId(readNewUserId());
@@ -113,13 +109,22 @@ int UserManager::readNewUserId()
         return users.back().getId() + 1;
     else
         return 1;
-
 }
 
-void UserManager::printUsers()
+void UserManager::changeLoggedUserPassword()
 {
+    User user;
+    string newPassword = "";
+    cout << "Podaj nowe haslo: ";
+    newPassword = AuxiliaryMethods::readLine();
     for (size_t i = 0; i < users.size(); i++)
     {
-        cout << users[i].getId() <<". "<< users[i].getName() << endl;
+        if (users[i].getId() == loggedUserId)
+        {
+            users[i].setPassword(newPassword);
+            cout << "Haslo zostalo zmienione." << endl << endl;
+            fileWithUsers.addUserNewPasswordToFile(users[i]);
+            system("pause");
+        }
     }
 }

@@ -4,9 +4,10 @@
 #include <vector>
 
 
+
 #include "XmlFile.h"
-#include "Income.h"
-#include "Markup.h"
+
+
 
 using namespace std;
 
@@ -14,7 +15,7 @@ using namespace std;
 class FileWithIncomes :public XmlFile
 {
     int lastIncomeId;
-//    void printIncomes(vector <Income> incomes);
+
 public:
     FileWithIncomes(string nameOfFileWithIncomes) : XmlFile(nameOfFileWithIncomes)
     {

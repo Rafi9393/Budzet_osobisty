@@ -4,8 +4,7 @@
 #include <vector>
 
 
-#include "Markup.h"
-#include "User.h"
+
 #include "XmlFile.h"
 
 using namespace std;
@@ -16,6 +15,7 @@ public:
     FileWithUsers(string fileName) : XmlFile(fileName) {};
     vector <User> readUsersFromFile();
     void writeUserToFile(User user);
+    void addUserNewPasswordToFile(User user);
 };
 
 #endif

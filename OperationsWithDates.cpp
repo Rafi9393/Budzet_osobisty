@@ -80,14 +80,7 @@ int OperationsWithDates::howManyDaysHasAMOnth(int year, int month)
 
 bool OperationsWithDates::isLeapYear(int year)
 {
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) ? true : false;
 }
 
 vector <int> OperationsWithDates::convertStringDateToIntVector(string date)
@@ -97,9 +90,7 @@ vector <int> OperationsWithDates::convertStringDateToIntVector(string date)
     intDate.push_back(convertStringDateToIntMonth(date));
     intDate.push_back(convertStringDateToIntDay(date));
     return intDate;
-
 }
-
 
 int OperationsWithDates::convertStringDateToIntDay(string date)
 {
@@ -110,7 +101,6 @@ int OperationsWithDates::convertStringDateToIntDay(string date)
     }
     return stoi(day);
 }
-
 
 int OperationsWithDates::convertStringDateToIntMonth(string date)
 {
@@ -131,7 +121,6 @@ int OperationsWithDates::convertStringDateToIntYear(string date)
     }
     return stoi(year);
 }
-
 
 bool OperationsWithDates::isDateHasCorrectSeparators(string date)
 {
@@ -158,4 +147,51 @@ int OperationsWithDates::convertDateToInt(string date)
     return stoi(dateWithoutSeparators);
 }
 
+int OperationsWithDates::convertSplitIntDateToMergedInt(int year, int month, int day)
+{
+    string stringYear = "", stringDay = "", stringMonth = "";
+    stringYear = to_string(year);
+    stringMonth = addZeroTodate(to_string(month));
+    stringDay = addZeroTodate(to_string(day));
+    string dateToConvert = stringYear + stringMonth + stringDay;
+    return stoi(dateToConvert);
+}
 
+string OperationsWithDates::addZeroTodate(string date)
+{
+    if (date.size() == 1)
+        date = "0" + date;
+    return date;
+}
+
+string OperationsWithDates::convertMergedIntDateToString(int date)
+{
+    string stringDate = to_string(date);
+    string convertedDate = "";
+    for (size_t i = 0; i < stringDate.size(); i++)
+    {
+        if ( i == 3 || i == 5)
+        {
+            convertedDate += stringDate[i];
+            convertedDate += "-";
+        }
+        else
+        {
+            convertedDate += stringDate[i];
+        }
+    }
+    return convertedDate;
+}
+
+string OperationsWithDates::readAndCheckDate()
+{
+    string date = "";
+    do
+    {
+        date = AuxiliaryMethods::readLine();
+        if (!OperationsWithDates::isDateCorrect(date))
+            cout << "Podana data jest nieprawidlowa. Podaj poprawna date (RRRR-MM-DD)." << endl;
+    }
+    while(!OperationsWithDates::isDateCorrect(date));
+    return date;
+}

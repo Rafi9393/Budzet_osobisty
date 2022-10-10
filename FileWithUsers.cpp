@@ -32,6 +32,7 @@ vector <User> FileWithUsers::readUsersFromFile()
     {
         cout << "Plik nie istnieje." <<endl;
     }
+
     return users;
 }
 
@@ -57,4 +58,28 @@ void FileWithUsers::writeUserToFile(User user)
     xml.AddElem("Password", user.getPassword());
 
     xml.Save(FILE_NAME);
+}
+
+void FileWithUsers::addUserNewPasswordToFile(User user)
+{
+    CMarkup xml;
+    bool fileExists = xml.Load( FILE_NAME );
+    int readUserId = 0;
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        while ( xml.FindElem("User") )
+        {
+            xml.IntoElem();
+            xml.FindElem( "id" );
+            readUserId = stoi( MCD_2PCSZ(xml.GetData()));
+            if (readUserId == user.getId())
+            {
+                xml.FindElem( "Password" );
+                xml.SetData(user.getPassword());
+                xml.Save(FILE_NAME);
+            }
+        }
+    }
 }
